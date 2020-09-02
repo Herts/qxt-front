@@ -1,0 +1,44 @@
+[
+  {
+    "cityName": "呼和浩特市",
+    "cntyName": "新城区",
+    "content": "预警信息发布",
+    "person": "张三",
+    "time": "2020/08/05 12:31:46"
+  },
+  {
+    "cityName": "呼和浩特市",
+    "cntyName": "回民区",
+    "content": "应急叫应",
+    "person": "李四",
+    "time": "2020/08/03 12:31:46"
+  },
+  {
+    "cityName": "赤峰市",
+    "cntyName": "市辖区",
+    "content": "服务产品制作",
+    "person": "张三",
+    "time": "2020/08/03 12:31:46"
+  },
+  {
+    "cityName": "呼和浩特市",
+    "cntyName": "新城区",
+    "content": "应急叫应",
+    "person": "王老五",
+    "time": "2020/08/01 12:31:46"
+  },
+  {
+    "cityName": "乌海市",
+    "cntyName": "市辖区",
+    "content": "服务产品制作",
+    "person": "李四",
+    "time": "2020/08/01 07:31:46"
+  },
+  {
+    "cityName": "赤峰市",
+    "cntyName": "市辖区",
+    "content": "应急叫应",
+    "person": "李四",
+    "time": "2020/07/29 07:31:46"
+  }
+]

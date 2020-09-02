@@ -1,0 +1,74 @@
+[
+  {
+    "cityName": "呼和浩特市",
+    "cntyName": "新城区",
+    "type": "雷电",
+    "level": "黄色",
+    "status": "待签发",
+    "time": "2020/08/05 12:31:46"
+  },
+  {
+    "cityName": "呼和浩特市",
+    "cntyName": "回民区",
+    "type": "雷电",
+    "level": "黄色",
+    "status": "已发布",
+    "time": "2020/08/03 12:31:46"
+  },
+  {
+    "cityName": "赤峰市",
+    "cntyName": "市辖区",
+    "type": "雷电",
+    "level": "黄色",
+    "status": "已发布",
+    "time": "2020/08/03 12:31:46"
+  },
+  {
+    "cityName": "呼和浩特市",
+    "cntyName": "赛罕区",
+    "type": "雷电",
+    "level": "黄色",
+    "status": "已发布",
+    "time": "2020/08/01 12:31:46"
+  },
+  {
+    "cityName": "乌海市",
+    "cntyName": "市辖区",
+    "type": "大风",
+    "level": "黄色",
+    "status": "已发布",
+    "time": "2020/08/01 07:31:46"
+  },
+  {
+    "cityName": "赤峰市",
+    "cntyName": "市辖区",
+    "type": "大风",
+    "level": "黄色",
+    "status": "已发布",
+    "time": "2020/07/29 07:31:46"
+  },
+  {
+    "cityName": "通辽市",
+    "cntyName": "市辖区",
+    "type": "暴雨",
+    "level": "蓝色",
+    "status": "已发布",
+    "time": "2020/07/25 07:31:46"
+  },
+  {
+    "cityName": "鄂尔多斯市",
+    "cntyName": "市辖区",
+    "type": "暴雨",
+    "level": "蓝色",
+    "status": "已发布",
+    "time": "2020/07/24 07:31:46"
+  },
+  {
+    "cityName": "呼和浩特市",
+    "cntyName": "赛罕区",
+    "type": "大风",
+    "level": "黄色",
+    "status": "已发布",
+    "time": "2020/07/23 07:31:46"
+  }
+]
