@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>统计报表</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/echarts.min.js"></script>
+    <link href="./node_modules/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="./node_modules/tabulator-tables/dist/js/tabulator.min.js"></script>
+</head>
+<body style="background-color: #2c343c">
+<select>
+    <option value ="hhht">呼和浩特</option>
+    <option value ="学校">中小学校</option>
+    <option value="">易燃易爆场所</option>
+    <option value="audi">山洪沟</option>
+    <option value="audi">河流</option>
+    <option value="audi">山塘水库</option>
+    <option value="audi">观测站</option>
+    <option value="audi">旅游景区</option>
+
+
+</select>
+<select>
+    <option value ="医院">医院</option>
+    <option value ="学校">中小学校</option>
+    <option value="">易燃易爆场所</option>
+    <option value="audi">山洪沟</option>
+    <option value="audi">河流</option>
+    <option value="audi">山塘水库</option>
+    <option value="audi">观测站</option>
+    <option value="audi">旅游景区</option>
+
+
+</select>
+
+<div id="main" style="width: 600px;height:400px;"></div>
+
+<div id="main-2" style="width: 600px;height:400px;"></div>
+
+<div id="example-table" style="width: 600px;height:400px;"></div>
+
+</body>
+<script type="application/javascript">
+
+
+    var myChart = echarts.init(document.getElementById('main'));
+    option = {
+        backgroundColor: '#2c343c',
+
+        title: {
+            text: '中小学校统计',
+            left: 'center',
+            top: 20,
+            textStyle: {
+                color: '#ccc'
+            }
+        },
+
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+
+        series: [{
+            name: '中小学校',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '50%'],
+            data: [
+                {value: 109, name: '土默特左旗'},
+                {value: 16, name: '托克托县'},
+                {value: 7, name: '武川县'},
+                {value: 42, name: '赛罕区'},
+
+            ].sort(function (a, b) {
+                return a.value - b.value;
+            }),
+            // roseType: 'radius',
+            label: {
+                color: 'rgba(255, 255, 255, 0.3)'
+            }
+        }]
+
+    };
+    myChart.setOption(option);
+    myChart = echarts.init(document.getElementById('main-2'));
+    option = {
+        // backgroundColor: '#2c343c',
+        xAxis: {
+            type: 'category',
+            data: ['医院', '中小学校', '易燃易爆场所', '山洪沟', '河流', '山塘水库', '观测站','旅游景区'],
+            axisLabel:{
+                formatter:function(value){
+                    return value.split("").join("\n");
+                },
+                textStyle: {
+                    color: '#ffffff'
+                }
+            }
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel:{
+                textStyle: {
+                    color: '#ffffff'
+                }
+            }
+        },
+        series: [{
+            data: [18, 174, 172, 80, 70, 110, 8],
+            type: 'bar',
+            showBackground: true,
+            backgroundStyle: {
+                color: 'rgba(220, 220, 220, 0.8)'
+            }
+        }]
+    };
+    myChart.setOption(option);
+</script>
+</html>

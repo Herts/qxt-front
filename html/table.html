@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>防灾减灾报表</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/mystyles.css">
+
+    <script src="/node_modules/echarts/dist/echarts.js"></script>
+    <link href="/node_modules/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/node_modules/tabulator-tables/dist/js/tabulator.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+
+    <!--<link href="./node_modules/tabulator-tables/dist/css/bulma/tabulator_bulma.min.css" rel="stylesheet">-->
+
+</head>
+<body>
+<div class="tile is-ancestor">
+    <div class="tile is-vertical is-8">
+        <div class="tile">
+            <div class="tile is-parent is-vertical is-4">
+                <article class="tile is-child box">
+                    <div id="alertTypeChart" style="width: 100%; min-height: 500px"></div>
+                </article>
+            </div>
+            <div class="tile is-parent">
+                <article class="tile is-child box">
+                    <p class="subtitle">防灾减灾服务监控</p>
+
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="tile is-parent ">
+        <article class="tile is-child box">
+            <div class="content">
+                <p class="subtitle">预警信息发布状态监控</p>
+                <div class="content">
+                    <div id="alert"></div>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+<div class="tile is-ancestor">
+    <div class="tile is-vertical is-8">
+        <div class="tile">
+            <div class="tile is-parent">
+                <article class="tile is-child box">
+                    <div id="oneAccountChart" style="width: 100%; min-height: 500px"></div>
+
+                </article>
+            </div>
+            <div class="tile is-parent">
+                <article class="tile is-child box">
+                    <div id="serviceFlowChart" style="width: 100%; min-height: 500px"></div>
+
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="tile is-parent">
+        <article class="tile is-child box">
+            <div class="content">
+                <p class="subtitle">服务日志监控</p>
+                <div id="serviceLog"></div>
+            </div>
+        </article>
+    </div>
+
+</div>
+</body>
+<script type="application/javascript">
+    var alertTable = new Tabulator("#alert", {
+        height: "100%", // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
+        ajaxURL: "./api/alert.json", //assign data to table
+        layout: "fitColumns", //fit columns to width of table (optional)
+        columns: [ //Define Table Columns
+            {title: "盟市", field: "cityName"},
+            {title: "旗县", field: "cntyName"},
+            {title: "类型", field: "type"},
+            {title: "级别", field: "level"},
+            {title: "状态", field: "status"},
+            {title: "发布时间", field: "time", sorter: "date", hozAlign: "center", width: 150},
+        ]
+    });
+
+    var serviceLogTable = new Tabulator("#serviceLog", {
+        height: "100%", // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
+        ajaxURL: "./api/serviceLog.json", //assign data to table
+        layout: "fitColumns", //fit columns to width of table (optional)
+        columns: [ //Define Table Columns
+            {title: "盟市", field: "cityName"},
+            {title: "旗县", field: "cntyName"},
+            {title: "工作内容", field: "content"},
+            {title: "操作人员", field: "person"},
+            {title: "发布时间", field: "time", sorter: "date", hozAlign: "center", width: 150},
+        ]
+    });
+</script>
+<script type="application/javascript">
+
+    var alertTypeChart = echarts.init(document.getElementById('alertTypeChart'));
+    alertTypeChart.showLoading();
+    var option = {
+        title: {
+            text: '预警类型统计',
+            subtext: '实时更新'
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        legend: {},
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'value',
+            boundaryGap: [0, 0.01]
+        },
+        yAxis: {
+            type: 'category',
+            data: ['台风', '暴雨', '暴雪', '寒潮', '大风', '沙尘暴', '高温', '干旱', '雷电', '冰雹', '霜冻', '大雾', '霾', '干热风', '道路结冰', '森林火险']
+        }
+    };
+    alertTypeChart.setOption(option);
+    $.get('/api/alertType.json').done(function (data) {
+        alertTypeChart.hideLoading();
+        alertTypeChart.setOption({
+            series: [{
+                data: data,
+                type: 'bar'
+            }]
+        });
+    });
+</script>
+<script type="application/javascript">
+
+    var oneAccountChart = echarts.init(document.getElementById('oneAccountChart'));
+    oneAccountChart.showLoading();
+    var option = {
+        title: {
+            text: '“一本帐”数据监控',
+            subtext: '实时更新'
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        legend: {
+            data: ['已更新', '未更新']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'value',
+            boundaryGap: [0, 0.01]
+        },
+        yAxis: {
+            type: 'category',
+            data: ['呼和浩特市',
+                '包头市',
+                '乌海市',
+                '赤峰市',
+                '通辽市',
+                '鄂尔多斯市',
+                '呼伦贝尔市',
+                '巴彦淖尔市',
+                '乌兰察布市',
+                '兴安盟',
+                '锡林郭勒盟',
+                '阿拉善盟',
+            ]
+        }
+    };
+    oneAccountChart.setOption(option);
+    $.get('/api/oneAccount.json').done(function (data) {
+        oneAccountChart.hideLoading();
+        oneAccountChart.setOption({
+            series: data
+        });
+    });
+    $(window).on('resize', function () {
+        if (oneAccountChart != null && oneAccountChart != undefined) {
+            oneAccountChart.resize();
+            alertTypeChart.resize();
+        }
+    });
+</script>
+<script type="application/javascript">
+    let serviceFlowChart = echarts.init(document.getElementById('serviceFlowChart'));
+    option = {
+        title: {
+            text: '服务流程监控',
+            subtext: '实时更新'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: '{b} : {c} ({d}%)'
+        },
+        legend: {
+            orient: 'vertical',
+            data: ['预警信息发布', '应急叫应', '服务产品制作', '灾情上报']
+        },
+        // backgroundColor: '#2c343c',
+        series: [{
+            name: '服务流程监控',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '50%'],
+            data: [
+                {value: 109, name: '预警信息发布'},
+                {value: 16, name: '应急叫应'},
+                {value: 7, name: '服务产品制作'},
+                {value: 42, name: '灾情上报'},
+
+            ].sort(function (a, b) {
+                return a.value - b.value;
+            }),
+            // roseType: 'radius',
+            label: {
+                position: 'outer',
+                color: 'rgb(0,0,0)'
+            }
+        }]
+    };
+    serviceFlowChart.setOption(option);
+</script>
+
+</html>
